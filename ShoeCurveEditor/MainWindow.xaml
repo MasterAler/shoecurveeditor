@@ -1,0 +1,136 @@
+﻿<Window x:Class="ShoeCurveEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="725" Width="860" Name="MainPrjWindow" Loaded="MainPrjWindow_Loaded" xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended" xmlns:my="clr-namespace:Microsoft.Windows.Controls.Chromes;assembly=WPFToolkit.Extended" ResizeMode="NoResize" Closed="MainPrjWindow_Closed" SizeChanged="MainPrjWindow_SizeChanged" WindowState="Maximized">
+    <Grid Name="MainGrid" ShowGridLines="False" Height="Auto" IsHitTestVisible="True">
+        <extToolkit:MagnifierManager.Magnifier>
+            <extToolkit:Magnifier Name="mgnALL"  Radius="100" ZoomFactor=".4" BorderBrush="#FF3333FF" BorderThickness="1" Background="AliceBlue" Grid.Row="2" IsEnabled="False" Visibility="Hidden" />
+        </extToolkit:MagnifierManager.Magnifier>        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0089FF" Offset="0" />
+                <GradientStop Color="#F900EBFF" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*" />
+            <ColumnDefinition Width="250*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding ElementName=MainMenu, Path=ActualHeight}" />
+            <RowDefinition Height="{Binding ElementName=BarMain, Path=ActualHeight}" />
+            <RowDefinition Height="250*" />
+            <RowDefinition Height="250*" />
+            <RowDefinition Height="{Binding ElementName=GlobalStatus, Path=ActualHeight}" />
+        </Grid.RowDefinitions>
+        <Border Name="bXZ" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" BorderThickness="2" BorderBrush="Black">
+            <Canvas Grid.Row="2" Grid.ColumnSpan="1" Name="cnvXZ" Background="#12F0FFFF" MouseMove="cnv_MouseMove" MouseLeave="cnv_MouseLeave" ClipToBounds="True" Tag="XZ" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" />
+                        <TranslateTransform Y="{Binding ElementName=cnvXZ, Path=ActualHeight}" />
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Canvas.ContextMenu>
+                    <ContextMenu Name="cntMenuXZ">
+                        <MenuItem Name="GridXZ" Header="Show Grid" IsCheckable="True" IsChecked="True" Click="GridXZ_Click" />
+                        <MenuItem Name="PointsXZ" Header="Show Points" IsEnabled="True" IsCheckable="True" IsChecked="False" Click="PointsXZ_Click" />
+                        <MenuItem Name="GuideLinesXZ" Header="Show Guidelines" IsCheckable="True" IsChecked="False" Click="GuidelinesXZ_Click" />
+                        <MenuItem Name="MarkerXZ" Header="ShowMarker" IsCheckable="True" IsChecked="True" Click="MarkerXZ_Click"/>
+                    </ContextMenu>
+                </Canvas.ContextMenu>
+            </Canvas>
+        </Border>
+        <Border Name="bYZ" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" BorderThickness="2" BorderBrush="Black">
+            <Canvas Grid.Row="2" Grid.ColumnSpan="1" Name="cnvYZ" Background="#12F0FFFF" ClipToBounds="True" MouseMove="cnv_MouseMove" MouseLeave="cnv_MouseLeave" Tag="YZ" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" />
+                        <TranslateTransform Y="{Binding ElementName=cnvYZ, Path=ActualHeight}" />
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Canvas.ContextMenu>
+                    <ContextMenu Name="cntMenuYZ">
+                        <MenuItem Name="GridYZ" Header="ShowGrid" IsCheckable="True" IsChecked="True" Click="GridYZ_Click" />
+                        <MenuItem Name="PointsYZ" Header="ShowPoints"  IsCheckable="True" IsChecked="False" Click="PointsYZ_Click" />
+                        <MenuItem Name="GuideLinesYZ" Header="Show Guidelines" IsCheckable="True" IsChecked="False" Click="GuidelinesYZ_Click" />    
+                        <MenuItem Name="Section" Header="Show Section" IsCheckable="True" IsChecked="False" Click="ShowSection_Click" />
+                        <MenuItem Name="Shift" Header="Center Shift" IsCheckable="True" IsChecked="True" Click="Shift_Click"/>
+                        <MenuItem Name="MarkerYZ" Header="ShowMarker" IsCheckable="True" IsChecked="True" Click="MarkerYZ_Click"/>
+                    </ContextMenu>
+                </Canvas.ContextMenu>
+            </Canvas>
+        </Border>
+        <Border Name="bXY" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" BorderThickness="2" BorderBrush="Black">
+            <Canvas Grid.Row="3" Grid.ColumnSpan="1" Name="cnvXY" Background="#12F0FFFF" ClipToBounds="True" MouseLeave="cnv_MouseLeave" MouseMove="cnv_MouseMove" Tag="XY" MouseLeftButtonDown="cnv_MouseLeftButtonDown" MouseLeftButtonUp="cnv_MouseLeftButtonUp">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" />
+                        <TranslateTransform Y="{Binding ElementName=cnvXY, Path=ActualHeight}" />
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Canvas.ContextMenu>
+                    <ContextMenu Name="cntMenuXY">
+                        <MenuItem Name="GridXY" Header="ShowGrid" IsCheckable="True" IsChecked="True" Click="GridXY_Click" />
+                        <MenuItem Name="PointsXY" Header="ShowPoints" IsEnabled="True" IsCheckable="True" IsChecked="True" Click="PointsXY_Click" />
+                        <MenuItem Name="GuideLinesXY" Header="Show Guidelines" IsCheckable="True" IsChecked="False" Click="GuidelinesXY_Click" />    
+                        <MenuItem Name="ShowIt" Header="ShowXY" IsCheckable="True" IsChecked="False" Click="ShowIt_Click"/>
+                        <MenuItem Name="SoleMode" Header="Sole Drawing">
+                            <MenuItem Name="sdPoints" Header="Points"  StaysOpenOnClick="True" IsCheckable="True" IsChecked="True" Click="sole_mode_Click"/>
+                            <MenuItem Name="sdLines" Header="Lines" StaysOpenOnClick="True" IsCheckable="True" IsChecked="False" Click="sole_mode_Click"/>
+                            <MenuItem Name="sdCurves" Header="Curves" StaysOpenOnClick="True" IsCheckable="True" IsChecked="False" Click="sole_mode_Click"/>
+                        </MenuItem>
+                    </ContextMenu>
+                </Canvas.ContextMenu>
+            </Canvas>
+        </Border>
+        <Border Name="b3D" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" BorderThickness="2" BorderBrush="Black">
+            <Canvas Grid.Row="3" Grid.ColumnSpan="1" Name="cnv3D" Background="#12F0FFFF">
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" />
+                        <TranslateTransform Y="{Binding ElementName=cnv3D, Path=ActualHeight}" />
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+                <Viewport3D Name="ModelViewer" ClipToBounds="True" Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=cnv3D, Path=ActualWidth}" Height="{Binding ElementName=cnv3D, Path=ActualHeight}"/>
+            </Canvas>
+        </Border>        
+        <Menu Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Name="MainMenu" Height="25" >
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Name="OpenItem" Click="MenuOpenItem_Click" />
+                <MenuItem Header="Import" Name="ImportItem" Click="ImportItem_Click" />
+                <MenuItem Header="Save" Name="SaveItem" Click="SaveItem_Click"/>
+                <MenuItem Header="Save sole as TXT" Name="SaveSole" Click="SaveSole_Click"/>
+                <MenuItem Header="Convert" Name="ConvertItem">
+                    <MenuItem Header="Binary STL -> OBJ" Name="bSTL2OBJ" Click="bSTL2OBJ_Click"/>
+                    <MenuItem Header="ASCII STL -> OBJ" Name="tSTL2OBJ" Click="tSTL2OBJ_Click"/>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" Click="MenuItemExit_Click" />
+            </MenuItem>
+            <MenuItem Header="Options" Name="options">
+                <MenuItem Header="Spline" IsCheckable="True" IsChecked="False" Click="MenuItemStyle_Click" Name="StyleItem" />
+                <MenuItem Header="Preferences"  Click="MenuItemPrefs_Click" Name="prefs" />
+                <MenuItem Header="XY - Parameters" Name="params" Click="params_Click"/>
+                <MenuItem Header="Magic Scale" IsCheckable="True" IsChecked="False" Name="OtherScale" Click="OtherScale_Click"/>
+                <MenuItem Name="sel2" Header="Select for marking" IsEnabled="False">
+                    <MenuItem Name="sXZ" Header="XZ" StaysOpenOnClick="True" IsCheckable="True" IsChecked="False" Tag="XZ" Click="sXZ_Click"/>
+                    <MenuItem Name="sYZ" Header="YZ" StaysOpenOnClick="True" IsCheckable="True" IsChecked="True" Tag="YZ" Click="sYZ_Click"/>
+                </MenuItem>
+                <MenuItem Name="Zoom" Header="Zoom" IsCheckable="True" IsChecked="False" Click="Zoom_Click"/>
+            </MenuItem>
+            <MenuItem Header="About" >
+                <MenuItem Header="О программе"  Click="MenuItemAbout_Click" />
+            </MenuItem>
+        </Menu>
+        <ToolBar Grid.Row="1" Grid.RowSpan="1" Grid.Column="0"  Grid.ColumnSpan="2" Name="BarMain" Height="25" ItemsSource="{Binding}" />
+        <StatusBar Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Height="25" Name="GlobalStatus">
+            <StatusBarItem Content="Keys:" DataContext="{Binding}" Name="KeyLabel" HorizontalAlignment="Left" />
+            <Separator Name="sep1" HorizontalAlignment="Left" />
+            <StatusBarItem Content="Rotation Angle: 0" HorizontalAlignment="Left" Name="AngleLabel" />
+            <Separator Name="sep2" HorizontalAlignment="Left" />
+            <StatusBarItem Content="" HorizontalAlignment="Left" Name="StatusLabel" IsManipulationEnabled="True" />
+            <ProgressBar Name="StatusProgress" HorizontalAlignment="Left" Value="0" VerticalAlignment="Top" MinWidth="100" Height="{Binding ElementName=GlobalStatus, Path=ActualHeight}" ClipToBounds="False" />
+        </StatusBar>
+    </Grid>
+</Window>

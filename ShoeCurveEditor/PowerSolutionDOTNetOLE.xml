@@ -1,0 +1,1978 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PowerSolutionDOTNetOLE
+</name>
+</assembly>
+<members>
+<member name="T:PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType">
+	<summary>
+ Enumeration of entity types in PowerMILL
+ </summary>
+</member><member name="T:PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumEntitySettingDataType">
+	<summary>
+ Enumeration of data types used in retrieving entity information
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.Connect">
+	<summary>
+ Makes the OLE Connection to the first running PowerMILL session
+ </summary>
+	<returns>True - OLE connection made, False - OLE connection failed</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.ConnectToNew">
+ -----------------------------------------------------------------------------
+ <summary>
+ Creates a new OLE instance of PowerMILL and makes the OLE connection.
+ The PowerMILL session will be closed automatically when the OLE connection ends, i.e. when exiting you application.
+ </summary>
+	<returns>True - OLE connection made, False - OLE connection failed</returns>
+	<remarks>
+ The PowerMILL session will be closed automatically when the OLE connection ends, i.e. when exiting you application.
+ </remarks>
+	<history>
+ 	[dal]	19/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.StartAndConnectToPowerMILL">
+ -----------------------------------------------------------------------------
+ <summary>
+ If there is no running session of PowerMILL, this method will run PowerMILL, then make the OLE
+ connection.  If PowerMILL is already running, it will connect directly to that session.
+ </summary>
+	<returns></returns>
+	<remarks>
+ Unlike the ConnectToNew method, using this method will not cause PowerMILL to close down automatically
+ when your application ends.
+ </remarks>
+	<history>
+ 	[dal]	19/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.DialogsOff">
+	<summary>
+ Turns off dialog messages
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.DialogsOn">
+	<summary>
+ Turns on dialog messages
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.Execute(System.String[])">
+	<summary>
+ Executes macro commands in PowerMILL.  A single command or a list/array of commands can be passed in one go.
+ An exception is thrown if no OLE connection exists.
+ </summary>
+	<param name="Command">A comma separated list of macro commands to execute, e.g. Execute("CREATE TOOL ; TYPE BALLNOSED", "EDIT TOOL ; DIAMETER 5")</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.Execute(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a single macro command
+ </summary>
+	<param name="Command">The single macro command to execute</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.Execute(System.String,System.Object[])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a macro command in PowerMILL allowing you to substitute tokens in the macro command, and giving the
+ parameter list for these tokens in their real data type.
+ </summary>
+	<param name="Command">Macro command to execute</param>
+	<param name="Parameters">Parameters to replace tokens with</param>
+	<remarks>
+		<para>You can use tokens within the macro command</para>
+		<para>%i will be replaced by an integer value converted to a string</para>
+		<para>%d will be replaced by a double value converted to a string up to 6 decimal places</para>
+		<para>e.g.    Execute("EDIT TOOL ; DIAMETER %d", 0.75)</para>
+		<para>This eliminates the need to convert values to strings to pass into the macro command before hand.</para>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.ExecuteEx(System.String)">
+	<summary>
+ Executes a macro command and returns any string printed to the command window.
+ ECHO COMMANDS will be turned off automatically when using this function.
+ </summary>
+	<param name="Command"></param>
+	<returns>Any string output to the command window during the command execution</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerMILLOLE.IsConnected">
+	<summary>
+ Checks if the OLE connection to PowerMILL exists.
+ </summary>
+	<returns>True - OLE Connection Exists, False - OLE Connection does not exist</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.GetEntityList(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType,System.Int32@,System.String[]@,System.Int32@)">
+	<summary>
+ Returns the list of entities in the current PowerMILL project
+ </summary>
+	<param name="EntityType">The type of entity to get the list of</param>
+	<param name="Number">Variable to hold the number of entities found</param>
+	<param name="List">Variable array to hold the names of the entities found</param>
+	<param name="ActiveID">The index in the List array of the entity that is active.  Or -1 if no active entity.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.GetActiveEntityName(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType)">
+	<summary>
+ Returns the name of the active entity
+ </summary>
+	<param name="EntityType">The type of entity to get the active name</param>
+	<returns>The name of the active entity or an empty string if none is active</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.GetLastCreatedEntityName(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType)">
+	<summary>
+ Gets the name of the last entity created.  For example if you've just created a toolpath, you can find out its name.
+ </summary>
+	<param name="EntityType">The type of entity to get the last created</param>
+	<returns>The name of the last entity created</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerMILLOLE.Visible">
+	<summary>
+ Sets of gets the visibility state of PowerMILL.  When invisible, PowerMILL will not appear in the task bar.
+ </summary>
+	<returns>True - PowerMILL is visible to the user, False - PowerMILL is hidden from the user</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.SetWindowState(PowerSolutionDOTNetOLE.clsGlobalEnumerations.enum_WindowStateType)">
+	<summary>
+ Sets the window state of the PowerMILL application.
+ </summary>
+	<param name="Value">The windowstate for PowerMILL, e.g. psMaximise, psMinimise, etc.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.GetEntityParameterInfo(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType,System.String)">
+	<summary>
+ Retrieves an array containing all of the parameter information for a particular entity
+ </summary>
+	<param name="EntityType">The type of entity to retrieve information for</param>
+	<param name="Name">The name of the entity</param>
+	<returns>An array of the parameter information, or Nothing if the entity does not exist</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.DoesGroupExistInInfoList(System.String[],System.String)">
+	<summary>
+ Find a group of settings from an array of parameter information.  This can be used to find the toolpath type for example.
+ </summary>
+	<param name="ParamInfo">Array containing parameter information</param>
+	<param name="Group">Group name to find in array</param>
+	<returns>True - Group exist, False - Group does not exist</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.ParseParameterInfoForSetting(System.String[],System.String,System.String,PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumEntitySettingDataType)">
+	<summary>
+ Find a specific setting within a group of the array of parameter information.
+ </summary>
+	<param name="ParamInfo">Array containing parameter information</param>
+	<param name="Group">Group to search for setting</param>
+	<param name="Setting">Setting to search for</param>
+	<param name="intType">Variable type of the setting, e.g. Integer, String, Boolean</param>
+	<returns>The value of the setting, or the default value of the data type if the setting is not found</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.GetEntitySize(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType,System.String,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+	<summary>
+ Get the min/max sizes of entities (excludes tool, group, stockmodel, workplane and ncprogram)
+ </summary>
+	<param name="EntityType">The type of entity to size</param>
+	<param name="Name">Name of entity to size.  When sizing Model or Block this parameter is ignored.</param>
+	<param name="XMin">Variable to return XMin to</param>
+	<param name="XMax">Variable to return XMax to</param>
+	<param name="YMin">Variable to return YMin to</param>
+	<param name="YMax">Variable to return YMax to</param>
+	<param name="ZMin">Variable to return ZMin to</param>
+	<param name="ZMax">Variable to return ZMax to</param>
+	<returns>True - entity sized correctly, False - entity could not be sized</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.Version">
+	<summary>
+ Get version number of PowerMILL connected to.
+ </summary>
+	<returns>The version number</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLOLE.CloseOLEConnections">
+	<summary>
+ Closes all OLE connection reference
+ </summary>
+</member><member name="T:PowerSolutionDOTNetOLE.clsPowerMILLOLE">
+	<summary>
+ OLE Tools For PowerMILL
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsStringFunctions.ParseTokenisedString(System.String,System.Object[])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Allows you to specify a string with tokens that will be replaced by the real values given as a parameter array.
+ This saves you having to format the real values and concatenating into the string.
+ </summary>
+	<param name="Command">The main string containing tokens</param>
+	<param name="Parameters">The real values to replace the tokens</param>
+	<returns>The reformatted string</returns>
+	<remarks>
+ You can use the %d token to replace with a double value, or the %i token to replace with an integer value.
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsStringFunctions">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsStringFunctions
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Class contains a number of shared functions for string handling
+ </summary>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsFileFunctions.BrowseForFolder(System.Object@,System.String@,System.String@)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Displays the directory browser dialog box, and waits for user selection of a directory
+ </summary>
+	<param name="owner">The parent form calling the dialog box</param>
+	<param name="Title">The title to display in the browser dialog box</param>
+	<param name="StartDir">The initial directory selected</param>
+	<returns>The pathname of the selected directory.</returns>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsFileFunctions.GetTempDirectory">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns the pathname to the temporary directory setup in the operating system
+ </summary>
+	<returns>The full pathname of the temp directory.</returns>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsFileFunctions.GetTemporaryFilename(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Generates the full path to a new filename to be created in the temporary directory, with the specified extension.
+ </summary>
+	<param name="Extension">The extension to include in the filename.</param>
+	<returns>The full path to the temporary file.</returns>
+	<remarks>
+ Note that this does not create a file, it just returns the name of a file in the temporary directory that does not yet exist.
+ It is useful to generate a filename when you want to export data from Delcam products temporarily.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsFileFunctions">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsFileFunctions
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ A series of shared routines wrapping up specific file and directory routines
+ </summary>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsRegistry.ReadRegistry(Microsoft.Win32.RegistryKey,System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reads a key from any path in the registry.
+ </summary>
+	<param name="ParentKey">The main key to search within, e.g. microsoft.Win32.Registry.LocalMachine</param>
+	<param name="SubKey">The path to the key within the main key, e.g. "SOFTWARE\Microsoft\Windows\CurrentVersion"</param>
+	<param name="ValueName">The key to read, e.g. "CurrentVersion"</param>
+	<returns>The value stored by the key.</returns>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsRegistry.ReadDcamRegistry(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reads a key from the HKEY_LOCAL_MACHINE\SOFTWARE\Delcam path 
+ </summary>
+	<param name="SubKey">Sub-key within the HKEY_LOCAL_MACHINE\SOFTWARE\Delcam tree, e.g. "Exec\PowerMILL"</param>
+	<param name="ValueName">The key to read, e.g. "CurrentVersion"</param>
+	<returns>The value stored by the key.</returns>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsRegistry.WriteDcamRegistry(System.String,System.String,System.Object)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Writes to or creates a key in the HKEY_LOCAL_MACHINE\SOFTWARE\Delcam path 
+ </summary>
+	<param name="SubKey">Sub-key within the HKEY_LOCAL_MACHINE\SOFTWARE\Delcam tree, e.g. "Exec\PowerMILL"</param>
+	<param name="ValueName">The key to write to, e.g. "CurrentVersion"</param>
+	<param name="Value">The value to write to the key</param>
+	<returns>True - the value was written successfully, False - failed to write to registry</returns>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsRegistry.WriteRegistry(Microsoft.Win32.RegistryKey,System.String,System.String,System.Object)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Writes a key to any path in the registry.
+ </summary>
+	<param name="ParentKey">The main key to write within, e.g. microsoft.Win32.Registry.LocalMachine</param>
+	<param name="SubKey">The path to the key to write to within the main key, e.g. "SOFTWARE\Delcam\Config\Node"</param>
+	<param name="ValueName">The key to write, e.g. "Shareddb"</param>
+	<param name="Value">The value to write to the key</param>
+	<returns>True - the value was written successfully, False - failed to write to registry</returns>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsRegistry">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsRegistry
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Provides easy access to reading and writing to the registry
+ </summary>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.#ctor">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor initialising coordinates as 0,0,0
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.#ctor(System.Double,System.Double,System.Double)">
+	<summary>
+ Constructor to initialise 3D point with specified coordinate
+ </summary>
+	<param name="pX">X coordinate of point</param>
+	<param name="pY">Y coordinate of point</param>
+	<param name="pZ">Z coordinate of point</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.#ctor(System.String)">
+	<summary>
+ Constructor to initialise 3D point using the coordinate extracted from PowerSHAPE object information.
+ Note that the OLE connection to PowerSHAPE must already exist.
+ If the object info. cannot be retrieved, the coordinates will be set to 0,0,0.
+ </summary>
+	<param name="ObjectInfo">The object info string to retrieve the coordinates from, e.g. LINE['1'].START</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.#ctor(PowerSolutionDOTNetOLE.clsEntityType,System.String)">
+	<summary>
+ Constructor to initialise 3D point using he object information from the specified clsEntityType object
+ Note that the OLE connection to PowerSHAPE must already exist.
+ </summary>
+	<param name="Entity">The clsEntityType object to extract the information from</param>
+	<param name="ObjectInfo">The specific object information to retrieve</param>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPoint3D.X">
+	<summary>
+ The X coordinate of the point
+ </summary>
+	<returns>The X coordinate of the point</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPoint3D.Y">
+	<summary>
+ The Y coordinate of the point
+ </summary>
+	<returns>The Y coordinate of the point</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPoint3D.Z">
+	<summary>
+ The Z coordinate of the point
+ </summary>
+	<returns>The Z coordinate of the point</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.GetPolar(System.Double@,System.Double@)">
+	<summary>
+ Returns the polar coordinate for the 3D point
+ </summary>
+	<param name="Radius">Variable to fill with the radius of the polar coordinate</param>
+	<param name="Angle">Variable to fill with angle of the polar coordinate</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.SerialisedString(System.Boolean,System.String,System.Int32)">
+	<summary>
+ Returns 3D point coordinates as a string separated by the specified delimiter.  This can be
+ used for example to send a coordinate readily into PowerSHAPE.
+ The defaults for the optional arguments are set to send in the basic point to PowerSHAPE, e.g.
+ No ABS command, and separated by a space.
+ e.g. Execute("CREATE LINE SINGLE", Start.SerialisedString())
+ Note the output is always using the POINT decimal separator.
+ </summary>
+	<param name="Absolute">Wether to include the ABS keyword with the coordinates - default = False</param>
+	<param name="Separator">The separator between points - default = SPACE</param>
+	<param name="DecimalPlaces">The maximum number of decimal places to output - default = 6</param>
+	<returns></returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.Copy">
+	<summary>
+ Copies the point entity returning a new point entity
+ </summary>
+	<returns>The copy of this point entity</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.PowerSHAPEVariantObject">
+	<summary>
+ Returns a variant array used by some PowerSHAPE OLE methods.
+ The variant array is bound from 0.
+ </summary>
+	<returns>The variant array containing the coordinates</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.ConvertToUnitVector">
+	<summary>
+ Converts coordinates as if they were a vector, into a Unit vector.
+ Sets coordinates to 0,0,0 if original vector is 0 length.
+ </summary>
+	<returns>True - Converted, False - Failed e.g. Zero length vector</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorAddition(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Adds a vector to the current vector returning the result
+ </summary>
+	<param name="Vector">The vector to add to this one</param>
+	<returns>A new clsPoint3D object of the vector addition</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorSubtraction(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Subtracts a vector to the current vector returning the result
+ </summary>
+	<param name="Vector">The vector to subtract from this one</param>
+	<returns>A new clsPoint3D object of the vector subtraction</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorMagnitude">
+	<summary>
+ Calculates the magnitude of the vector defined by this object
+ </summary>
+	<returns>The magnitude</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorMagnitude(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the magnitude of the specified Vector
+ </summary>
+	<param name="Vector">The clsPoint3D representing the vector</param>
+	<returns>The magnitude</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorAddition(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Adds two specified vectors returning the resulting vector
+ </summary>
+	<param name="Vector1">1st vector</param>
+	<param name="Vector2">Vector to add to first</param>
+	<returns>The vector addition as a new clsPoint3D object</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorSubtraction(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Subtracts two specified vectors returning the resulting vector
+ </summary>
+	<param name="Vector1">The 1st Vector</param>
+	<param name="Vector2">The vector to subtract from the first</param>
+	<returns>The vector subtraction as a new clsPoint3D object</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.ScalarVector(PowerSolutionDOTNetOLE.clsPoint3D,System.Double)">
+	<summary>
+ Calculates a scalar vector from 2 specified vectors.
+ </summary>
+	<param name="Vector">Vector to scale</param>
+	<param name="Scalar">Scalar to apply</param>
+	<returns>The resulting scalar vector</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.ScalarVector(System.Double)">
+	<summary>
+ Calculates a scalar vector by applying the scalar to this object
+ </summary>
+	<param name="Scalar">The scalar to apply</param>
+	<returns>The resulting scalar vector</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorCrossProduct(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates a cross product of 2 specified vectors
+ </summary>
+	<param name="Vector1">First vector</param>
+	<param name="Vector2">Second vector</param>
+	<returns>The cross product vector of the 2 vectors</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.VectorCrossProduct(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the cross product between this object and the specified vector.
+ </summary>
+	<param name="Vector">The vector to cross with this object</param>
+	<returns>The resulting cross product vector</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.DotProduct(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the dot product of two specified vectors
+ </summary>
+	<param name="Vector1">First vector</param>
+	<param name="Vector2">Secont vector</param>
+	<returns>The calculated dot product</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.DotProduct(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Returns the dot product of this object with another vector
+ </summary>
+	<param name="Vector">The 2nd vector for the dot product calculation</param>
+	<returns>The calculated dot product</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.GetXYVectors(PowerSolutionDOTNetOLE.clsPoint3D@,PowerSolutionDOTNetOLE.clsPoint3D@)">
+	<summary>
+ Calculates nominal X and Y axes vectors using the unit vector of this clsPoint3D object as the Z Axis of reference
+ </summary>
+	<param name="XAxis">The resulting X axis</param>
+	<param name="YAxis">The resulting Y axis</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.GetXYVectors(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D@,PowerSolutionDOTNetOLE.clsPoint3D@)">
+	<summary>
+ Calculates nominal X and Y axes vectors using the specified Z axis as the reference
+ </summary>
+	<param name="ZAxis">The Z axis to use as reference</param>
+	<param name="XAxis">The resulting X axis</param>
+	<param name="YAxis">The resulting Y axis</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.TransformFromWkpl(PowerSolutionDOTNetOLE.clsPoint3D,System.Boolean,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the coordinates of a specified Point given in workplane coordinates in WORLD coordinates
+ The workplane being defined by the origin, and X, Y and Z axes 
+ </summary>
+	<param name="Point">The point to transform</param>
+	<param name="IsPoint">True - transform as a point, False - transform as a vector (i.e. origin ignored)</param>
+	<param name="Origin">The origin of the workplane</param>
+	<param name="XAxis">The X axis of the workplane</param>
+	<param name="YAxis">The Y axis of the workplane</param>
+	<param name="ZAxis">The Z axis of the workplane</param>
+	<returns>The point measured relative to WORLD</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.TransformFromWkpl(System.Boolean,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the coordinates of this point object given in workplane coordinates in WORLD coordinates
+ The workplane being defined by the origin, and X, Y and Z axes 
+ </summary>
+	<param name="IsPoint">True - transform as a point, False - transform as a vector (i.e. origin ignored)</param>
+	<param name="Origin">The origin of the workplane</param>
+	<param name="XAxis">The X axis of the workplane</param>
+	<param name="YAxis">The Y axis of the workplane</param>
+	<param name="ZAxis">The Z axis of the workplane</param>
+	<returns>The point measured relative to WORLD</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.TransformToWkpl(PowerSolutionDOTNetOLE.clsPoint3D,System.Boolean,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the coordinates of a specified Point given in WORLD coordinates in LOCAL WORKPLANE coordinates
+ The workplane being defined by the origin, and X, Y and Z axes 
+ </summary>
+	<param name="Point">The point to transform</param>
+	<param name="IsPoint">True - transform as a point, False - transform as a vector (i.e. origin ignored)</param>
+	<param name="Origin">The origin of the workplane</param>
+	<param name="XAxis">The X axis of the workplane</param>
+	<param name="YAxis">The Y axis of the workplane</param>
+	<param name="ZAxis">The Z axis of the workplane</param>
+	<returns>The point measured relative to the WORKPLANE</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.TransformToWkpl(System.Boolean,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the coordinates of this point object given in WORLD coordinates in LOCAL WORKPLANE coordinates
+ The workplane being defined by the origin, and X, Y and Z axes 
+ </summary>
+	<param name="IsPoint">True - transform as a point, False - transform as a vector (i.e. origin ignored)</param>
+	<param name="Origin">The origin of the workplane</param>
+	<param name="XAxis">The X axis of the workplane</param>
+	<param name="YAxis">The Y axis of the workplane</param>
+	<param name="ZAxis">The Z axis of the workplane</param>
+	<returns>The point measured relative to the WORKPLANE</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.ZAxisNormalFrom3Points(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the Z Axis of a plane passing through 3 specified points
+ </summary>
+	<param name="P1">Point 1</param>
+	<param name="P2">Point 2</param>
+	<param name="P3">Point 3</param>
+	<returns>The resulting Z Axis vector of the plane.  It is always orientated along World Z+.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.DistanceBetweenPoints(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the 3D distance between 2 specified points
+ </summary>
+	<param name="Point1">First point in measurement</param>
+	<param name="Point2">Second point in measurement</param>
+	<returns>The true 3D distance between points</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.DistanceBetweenPoints(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the 3D distance between this point object and the specified point object
+ </summary>
+	<param name="Point">Point to measure to</param>
+	<returns>The true 3D distance</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.MidPoint(PowerSolutionDOTNetOLE.clsPoint3D@,PowerSolutionDOTNetOLE.clsPoint3D@)">
+	<summary>
+ Calculates the mid-point between two specified points in 3D.
+ </summary>
+	<param name="Point1">First point</param>
+	<param name="Point2">Second point</param>
+	<returns>The mid-point (in 3D) between the points specified.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPoint3D.MidPoint(PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Calculates the mid-point between this point object and the specified point in 3D.
+ </summary>
+	<param name="Point">Second point to check between</param>
+	<returns>The mid-point between this object and the specified point</returns>
+</member><member name="T:PowerSolutionDOTNetOLE.clsPoint3D">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsPoint3D
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Class used to store and manipulate a 3D point.
+ </summary>
+	<remarks>
+ The 3D point is a virtual object, i.e. it is independant of Delcam products, it isn't a physical CAD entity,
+ it is store of an XYZ coordinate, but also providing mathemetical functionality working with points and vectors.
+ Certain methods do interact directly with Delcam products, in which case you must first have ensured the
+ OLE connection to that product has already been made.
+ </remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.#ctor(PowerSolutionDOTNetOLE.clsEntityType@,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor to create the composite curve object from a specified clsEntityType object
+ </summary>
+	<param name="Entity">The clsEntityType object representing the composite curve to work with</param>
+	<param name="UseWorld"><para>True - curve information and editing is done with respect to World origin.</para>
+		<para>False - curve information and editing is done with respect to the active workplane.</para></param>
+	<remarks>
+		<para>The OLE connection must have already been made to PowerSHAPE (clsPowerSHAPEOLE.Connect), and a model must be opened
+ in PowerSHAPE.  An exception is thrown if neither has been done.</para>
+		<para>If the curve is closed, the last point in the curve stored will be the same as the first. e.g. A closed curve with 8 points will be stored as having 9.</para>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.#ctor(System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor to create the composite curve object by giving the name of the Composite curve entity
+ </summary>
+	<param name="CurveName">The name of the curve to define the object from</param>
+	<param name="UseWorld"><para>True - curve information and editing is done with respect to World origin.</para>
+		<para>False - curve information and editing is done with respect to the active workplane.</para></param>
+	<remarks>
+		<para>If the composite curve does not exist, an exception will be thrown.</para>
+		<para>The OLE connection must have already been made to PowerSHAPE (clsPowerSHAPEOLE.Connect), and a model must be opened
+ in PowerSHAPE.  An exception is thrown if neither has been done.</para>
+		<para>If the curve is closed, the last point in the curve stored will be the same as the first. e.g. A closed curve with 8 points will be stored as having 9.</para>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.ApplyChanges">
+ -----------------------------------------------------------------------------
+ <summary>
+ Applies any changes to the curve data to the curve entity in PowerSHAPE.
+ </summary>
+	<remarks>
+ Note that the changes to the curve will not be seen in PowerSHAPE until a VIEW, REBUILD is done.
+ This helps speed up the manipulation of curves without updating the graphics constantly.
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.GetCoordinateAtParameter(System.Double)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns XYZ coordinate at any parameter position along the curve
+ </summary>
+	<param name="Param">The parameter position to return the XYZ coordinate of.</param>
+	<returns>The clsPoint3D object for the  XYZ position.</returns>
+	<remarks>
+ Any parameter value can be given, not just at the curve key points.  The Parameter position must be between 1 and Number of Points in the curve.
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.GetParameterAfterDir(System.Double)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns the After unit vector at any parameter position
+ </summary>
+	<param name="Param">The parameter position to return the After direction vector of.</param>
+	<returns>The clsPoint3D object containing the After vector.</returns>
+	<remarks>
+ Any parameter value can be given, not just at the curve key points.  The Parameter position must be between 1 and Number of Points in the curve.
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.GetParameterBeforeDir(System.Double)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns the Before unit vector at any parameter position
+ </summary>
+	<param name="Param">The parameter position to return the Before direction vector of.</param>
+	<returns>The clsPoint3D object containing the Before vector.</returns>
+	<remarks>
+ Any parameter value can be given, not just at the curve key points.  The Parameter position must be between 1 and Number of Points in the curve.
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.NumberOfPoints">
+ -----------------------------------------------------------------------------
+ <summary>
+ Readonly property to return the number of points in the curve.
+ </summary>
+	<value>The number of points in the curve</value>
+	<remarks>
+ Note that a closed curve is stored with a point at the end of the curve at the same position as the start.  e.g.
+ a closed curve with 8 points will return as having 9 points.
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointPosition(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property for setting or getting the position of a keypoint in the curve
+ </summary>
+	<param name="Index">The key point - starting at 0</param>
+	<value>The XYZ position for the key point as a clsPoint3d Object</value>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointBeforeDirection(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property for setting or getting the before direction vector of the curve at a keypoint
+ </summary>
+	<param name="Index">The key point - starting at 0</param>
+	<value>The unit vector of the before direction at the key point as a clsPoint3d Object</value>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointAfterDirection(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property for setting or getting the after direction vector of the curve at a keypoint
+ </summary>
+	<param name="Index">The key point - starting at 0</param>
+	<value>The unit vector of the after direction at the key point as a clsPoint3d Object</value>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointAfterMagnitude(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property for getting or setting the magnitude of the curve after a key point
+ </summary>
+	<param name="Index">The key point to set the magnitude for - starting from 0</param>
+	<value>The magnitude value</value>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointBeforeMagnitude(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property for getting or setting the magnitude of the curve before a key point
+ </summary>
+	<param name="Index">The key point to set the magnitude for - starting from 0</param>
+	<value>The magnitude value</value>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointAfterDirectionFree(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property to get wether the direction of the curve after a keypoint is set to tangent free
+ </summary>
+	<param name="Index">The key point to get/set the after direction free.</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointBeforeDirectionFree(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property to get wether the direction of the curve before a keypoint is set to tangent free
+ </summary>
+	<param name="Index">The key point to get/set the before direction free.</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointAfterMagnitudeFree(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property to get wether the magnitude of the curve after a keypoint is set to be free
+ </summary>
+	<param name="Index">The key point to get/set the after magnitude free.</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsCompositeCurve.KeyPointBeforeMagnitudeFree(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Property to get wether the magnitude of the curve Before a keypoint is set to be free
+ </summary>
+	<param name="Index">The key point to get/set the Before magnitude free.</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCompositeCurve.IsCurveClosed">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns wether the curve is closed or not.
+ </summary>
+	<returns>True - curve is closed, False - curve is open</returns>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsCompositeCurve">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsCompositeCurve
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Class for point and tangeny information from a composite curve, and
+ allowing for fast modification of the composite curve
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.#ctor(System.Double,System.Double,System.Double)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor for triangle node object using coordinate only
+ </summary>
+	<param name="nX">X coordinate of triangle node</param>
+	<param name="nY">Y coordinate of triangle node</param>
+	<param name="nZ">Z coordinate of triangle node</param>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor for triangle node object using coordinate and normal vector 
+ </summary>
+	<param name="nX">X coordinate of triangle node</param>
+	<param name="nY">Y coordinate of triangle node</param>
+	<param name="nZ">Z coordinate of triangle node</param>
+	<param name="nI">I component of normal vector</param>
+	<param name="nJ">J component of normal vector</param>
+	<param name="nK">K component of normal vector</param>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.#ctor(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor for triangle node object using a clsPoint3D object representing the
+ position, and a clsPoint3D object representing the normal vector
+ </summary>
+	<param name="Position"></param>
+	<param name="Normal"></param>
+	<history>
+ 	[dal]	26/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.#ctor(PowerSolutionDOTNetOLE.clsPoint3D)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructor for triangle node object using a clsPoint3D Object for the position
+ </summary>
+	<param name="Position"></param>
+	<history>
+ 	[dal]	26/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.Copy">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns a new clsTriangleNode identical to the reference object
+ </summary>
+	<returns>A new clsTriangleNode object</returns>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.Location">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reference to the clsPoint3D object representing the location of the triangle node
+ </summary>
+	<value></value>
+	<remarks>
+ If the position has not been defined for the node, an exception will be thrown
+ </remarks>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.Normal">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reference to the clsPoint3D object representing the normal vector of the triangle node
+ </summary>
+	<value></value>
+	<remarks>
+ If the normals have not been defined for the node, an exception will be thrown
+ </remarks>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode.IsNormalDefined">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns wether the normals have been defined for the triangle node
+ </summary>
+	<returns>True - normals defined, False - normals not defined</returns>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsDMT.clsTriangleNode
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Class Library for storing a single triangle node information
+ </summary>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.ClearTriangleBlock">
+ -----------------------------------------------------------------------------
+ <summary>
+ Clears all triangles and nodes from the triangle block
+ </summary>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.#ctor">
+ -----------------------------------------------------------------------------
+ <summary>
+ Creates a new empty triangle block
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.#ctor(PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode[],System.Int32[0:,0:])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructs a new triangle block from a list of nodes
+ </summary>
+	<param name="NodeList">A one-dimension array of clsTriangleNode objects</param>
+	<param name="TriangleNodeIndeces">A two-dimensional array defining the triangles by index referencing the node list.</param>
+	<remarks>
+ The TriangleNodeIndeces array must be declared correctly.  It should be a two-dimensional array, 2nd dimension from 0 to 2.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.NumberOfNodes">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns the number of nodes defined in the triangle block
+ </summary>
+	<value>The number of nodes.</value>
+	<remarks>
+ Note that the number of nodes does not necessarily match the number of triangles x 3, since triangles
+ may share the same nodes.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.NumberOfTriangles">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns the number of triangles in the triangle block
+ </summary>
+	<value>Number of triangles</value>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.AddTriangle(PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode,PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode,PowerSolutionDOTNetOLE.clsDMT.clsTriangleNode)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Adds a new triangle to the triangle block
+ </summary>
+	<param name="Node1">clsTriangleNode object containing data for 1st node</param>
+	<param name="Node2">clsTriangleNode object containing data for 2nd node</param>
+	<param name="Node3">clsTriangleNode object containing data for 3rd node</param>
+	<remarks>
+		<para>If the triangle block has been created from nodes containing normals, then the nodes you define
+ to add triangles to the block must also contain normals, otherwise an exception will be thrown.</para>
+		<para>If the triangle block has been created from nodes without normals, then you can supply nodes with
+ or without normals.  If normals are supplied, they will be ignored.</para>
+	</remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.Node(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns a reference to a specific clsTriangleNode object in the triangle block
+ by specifying the index of the node in the full node list.
+ </summary>
+	<param name="Index">The index of the node to return</param>
+	<value>The clsTriangleNode object</value>
+	<remarks>
+ Changing any parameters of the reference node object will effectively modify the
+ actual triangle that references that particular object
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock.TriangleNode(System.Int32,System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns a reference to a specific clsTriangleNode object in the triangle block
+ by specifying the triangle and node number.
+ </summary>
+	<param name="TriangleIndex">The triangle to extract the node from</param>
+	<param name="Node">The node (0 to 2) of the triangle.</param>
+	<value>The clsTriangleNode object</value>
+	<remarks>
+ Changing any parameters of the reference node object will effectively modify the
+ actual triangle that references that particular object
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsDMT.clsTriangleBlock
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Class defining a block of triangles 
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="E:PowerSolutionDOTNetOLE.clsDMT.FileProgress">
+ -----------------------------------------------------------------------------
+ <summary>
+ Event raised to indicate percentage progress when reading or writing a DMT file
+ </summary>
+	<remarks>
+ The percentage of progress complete is passed by the event.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="E:PowerSolutionDOTNetOLE.clsDMT.ReportStatus">
+ -----------------------------------------------------------------------------
+ <summary>
+ Event raised when new status of reading or writing DMT file occurs
+ </summary>
+	<remarks>
+ A text message of the status is passed by the event.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.#ctor">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructs a new empty DMT File
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.CancelDMTFileOperation">
+ -----------------------------------------------------------------------------
+ <summary>
+ Cancels any running reading or writing of a DMT file
+ </summary>
+	<remarks>
+ This method has no effect if no reading or writing operation is in progress
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.#ctor(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Constructs a new DMT File from reading a specified DMT file from disk
+ </summary>
+	<param name="DMTFile"></param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.AddTriangleBlock(PowerSolutionDOTNetOLE.clsDMT.clsTriangleBlock)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Adds a defined triangle block to the DMT file object
+ </summary>
+	<param name="NewBlock">Defined triangle block clsTriangleBlock object</param>
+	<remarks>
+ The triangle block must contain valid nodes and triangles, otherwise an exception will be thrown.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.ClearDMTFile">
+ -----------------------------------------------------------------------------
+ <summary>
+ Clears all block definitions within the DMT object
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.NumberOfBlocks">
+ -----------------------------------------------------------------------------
+ <summary>
+ The number of blocks defined in the DMT object
+ </summary>
+	<value>Number of blocks</value>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.TotalNumberOfTriangles">
+ -----------------------------------------------------------------------------
+ <summary>
+ The total number of triangles in the DMT Object, i.e. sum of all triangles of all blocks
+ </summary>
+	<value>Number of triangles</value>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.TotalNumberOfNodes">
+ -----------------------------------------------------------------------------
+ <summary>
+ The total number of nodes in the DMT object, i.e. sum of all nodes of all blocks
+ </summary>
+	<value>Number of nodes</value>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:PowerSolutionDOTNetOLE.clsDMT.Block(System.Int32)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns a reference to a triangle block object within the DMT object
+ </summary>
+	<param name="Index">Triangle block index to reference to</param>
+	<value>A clsTriangleBlock object</value>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsDMT.WriteDMTFile(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Writes the defined DMT object as a DMT File to disk
+ </summary>
+	<param name="DMTFile">The DMT Filename to create</param>
+	<remarks>
+ The DMT File must not already exists, otherwise an exception will be thrown - ensure you delete it first in code.
+ The size of the DMT file may be greater than that read, since all node coordinates are exported as DOUBLE values.
+ </remarks>
+	<history>
+ 	[dal]	25/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsDMT">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsDMTFile
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ This class library is for working with DMT Files, for example extracting
+ triangle node information from existing files, or dynamically creating 
+ triangle file.
+ </summary>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsGlobalEnumerations.enum_WindowStateType">
+ -----------------------------------------------------------------------------
+ <summary>
+ Enumeration of windows application window states
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+</member><member name="T:PowerSolutionDOTNetOLE.clsGlobalEnumerations.enum_UnitsType">
+ -----------------------------------------------------------------------------
+ <summary>
+ Enumeration for indicating measurement units
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+</member><member name="T:PowerSolutionDOTNetOLE.clsGlobalEnumerations">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsGlobalEnumerations
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ General enumerations.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.Connect(System.Boolean)">
+	<summary>
+ Makes the OLE Connection to the first running PowerMILL session
+ </summary>
+	<returns>True - OLE connection made, False - OLE connection failed</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.ConnectToNew">
+ -----------------------------------------------------------------------------
+ <summary>
+ Creates a new OLE instance of PowerMILL and makes the OLE connection.
+ The PowerMILL session will be closed automatically when the OLE connection ends, i.e. when exiting you application.
+ </summary>
+	<returns>True - OLE connection made, False - OLE connection failed</returns>
+	<remarks>
+ The PowerMILL session will be closed automatically when the OLE connection ends, i.e. when exiting you application.
+ </remarks>
+	<history>
+ 	[dal]	19/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.StartAndConnectToPowerMILL">
+ -----------------------------------------------------------------------------
+ <summary>
+ If there is no running session of PowerMILL, this method will run PowerMILL, then make the OLE
+ connection.  If PowerMILL is already running, it will connect directly to that session.
+ </summary>
+	<returns></returns>
+	<remarks>
+ Unlike the ConnectToNew method, using this method will not cause PowerMILL to close down automatically
+ when your application ends.
+ </remarks>
+	<history>
+ 	[dal]	19/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.DialogsOff">
+	<summary>
+ Turns off dialog messages
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.DialogsOn">
+	<summary>
+ Turns on dialog messages
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.Execute(System.String[])">
+	<summary>
+ Executes macro commands in PowerMILL.  A single command or a list/array of commands can be passed in one go.
+ An exception is thrown if no OLE connection exists.
+ </summary>
+	<param name="Command">A comma separated list of macro commands to execute, e.g. Execute("CREATE TOOL ; TYPE BALLNOSED", "EDIT TOOL ; DIAMETER 5")</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.Execute(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a single macro command
+ </summary>
+	<param name="Command">The single macro command to execute</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.Execute(System.String,System.Object[])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a macro command in PowerMILL allowing you to substitute tokens in the macro command, and giving the
+ parameter list for these tokens in their real data type.
+ </summary>
+	<param name="Command">Macro command to execute</param>
+	<param name="Parameters">Parameters to replace tokens with</param>
+	<remarks>
+		<para>You can use tokens within the macro command</para>
+		<para>%i will be replaced by an integer value converted to a string</para>
+		<para>%d will be replaced by a double value converted to a string up to 6 decimal places</para>
+		<para>e.g.    Execute("EDIT TOOL ; DIAMETER %d", 0.75)</para>
+		<para>This eliminates the need to convert values to strings to pass into the macro command before hand.</para>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.ExecuteEx(System.String)">
+	<summary>
+ Executes a macro command and returns any string printed to the command window.
+ ECHO COMMANDS will be turned off automatically when using this function.
+ </summary>
+	<param name="Command"></param>
+	<returns>Any string output to the command window during the command execution</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerMILLInstance.IsConnected">
+	<summary>
+ Checks if the OLE connection to PowerMILL exists.
+ </summary>
+	<returns>True - OLE Connection Exists, False - OLE Connection does not exist</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.GetEntityList(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType,System.Int32@,System.String[]@,System.Int32@)">
+	<summary>
+ Returns the list of entities in the current PowerMILL project
+ </summary>
+	<param name="EntityType">The type of entity to get the list of</param>
+	<param name="Number">Variable to hold the number of entities found</param>
+	<param name="List">Variable array to hold the names of the entities found</param>
+	<param name="ActiveID">The index in the List array of the entity that is active.  Or -1 if no active entity.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.GetActiveEntityName(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType)">
+	<summary>
+ Returns the name of the active entity
+ </summary>
+	<param name="EntityType">The type of entity to get the active name</param>
+	<returns>The name of the active entity or an empty string if none is active</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.GetLastCreatedEntityName(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType)">
+	<summary>
+ Gets the name of the last entity created.  For example if you've just created a toolpath, you can find out its name.
+ </summary>
+	<param name="EntityType">The type of entity to get the last created</param>
+	<returns>The name of the last entity created</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerMILLInstance.Visible">
+	<summary>
+ Sets of gets the visibility state of PowerMILL.  When invisible, PowerMILL will not appear in the task bar.
+ </summary>
+	<returns>True - PowerMILL is visible to the user, False - PowerMILL is hidden from the user</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.SetWindowState(PowerSolutionDOTNetOLE.clsGlobalEnumerations.enum_WindowStateType)">
+	<summary>
+ Sets the window state of the PowerMILL application.
+ </summary>
+	<param name="Value">The windowstate for PowerMILL, e.g. psMaximise, psMinimise, etc.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.GetEntityParameterInfo(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType,System.String)">
+	<summary>
+ Retrieves an array containing all of the parameter information for a particular entity
+ </summary>
+	<param name="EntityType">The type of entity to retrieve information for</param>
+	<param name="Name">The name of the entity</param>
+	<returns>An array of the parameter information, or Nothing if the entity does not exist</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.DoesGroupExistInInfoList(System.String[],System.String)">
+	<summary>
+ Find a group of settings from an array of parameter information.  This can be used to find the toolpath type for example.
+ </summary>
+	<param name="ParamInfo">Array containing parameter information</param>
+	<param name="Group">Group name to find in array</param>
+	<returns>True - Group exist, False - Group does not exist</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.ParseParameterInfoForSetting(System.String[],System.String,System.String,PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumEntitySettingDataType)">
+	<summary>
+ Find a specific setting within a group of the array of parameter information.
+ </summary>
+	<param name="ParamInfo">Array containing parameter information</param>
+	<param name="Group">Group to search for setting</param>
+	<param name="Setting">Setting to search for</param>
+	<param name="intType">Variable type of the setting, e.g. Integer, String, Boolean</param>
+	<returns>The value of the setting, or the default value of the data type if the setting is not found</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.GetEntitySize(PowerSolutionDOTNetOLE.clsPowerMILLOLE.enumPowerMILLEntityType,System.String,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+	<summary>
+ Get the min/max sizes of entities (excludes tool, group, stockmodel, workplane and ncprogram)
+ </summary>
+	<param name="EntityType">The type of entity to size</param>
+	<param name="Name">Name of entity to size.  When sizing Model or Block this parameter is ignored.</param>
+	<param name="XMin">Variable to return XMin to</param>
+	<param name="XMax">Variable to return XMax to</param>
+	<param name="YMin">Variable to return YMin to</param>
+	<param name="YMax">Variable to return YMax to</param>
+	<param name="ZMin">Variable to return ZMin to</param>
+	<param name="ZMax">Variable to return ZMax to</param>
+	<returns>True - entity sized correctly, False - entity could not be sized</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.Version">
+	<summary>
+ Get version number of PowerMILL connected to.
+ </summary>
+	<returns>The version number</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerMILLInstance.CloseOLEConnections">
+	<summary>
+ Closes all OLE connection reference
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.Connect">
+	<summary>
+ Rebuilds OLE connection to first instance of CopyCAD running
+ </summary>
+	<returns>True if connection made, False if no connection made</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.Execute(System.String[])">
+	<summary>
+ Execute one of more macro commands in CopyCAD
+ </summary>
+	<param name="Command">Array of one or more macro commands</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.Execute(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a single macro command
+ </summary>
+	<param name="Command">The single macro command to execute</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.Execute(System.String,System.Object[])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a macro command in CopyCAD allowing you to substitute tokens in the macro command, and giving the
+ parameter list for these tokens in their real data type.
+ </summary>
+	<param name="Command">Macro command to execute</param>
+	<param name="Parameters">Parameters to replace tokens with</param>
+	<remarks>
+		<para>You can use tokens within the macro command</para>
+		<para>%i will be replaced by an integer value converted to a string</para>
+		<para>%d will be replaced by a double value converted to a string up to 6 decimal places</para>
+		<para>e.g.    Execute("EDIT TOLERANCE %d", 0.01)</para>
+		<para>This eliminates the need to convert values to strings to pass into the macro command before hand.</para>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.ExecuteAndReturnCMDLine(System.String)">
+	<summary>
+ Execute single macro command returning command line output.
+ Status popup warnings will be turned off automatically, but restored after completion.
+ </summary>
+	<param name="Command">The macro command to execute</param>
+	<returns>The string printed to the command window as a result of executing the command</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsCopyCADOLE.IsConnected">
+	<summary>
+ Check if OLE connection to CopyCAD exists
+ </summary>
+	<returns>True = connection made, False = no connection</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.DialogsOff">
+	<summary>
+ Turn off all popup messages/warnings issues by CopyCAD, or increment DialogOff counter
+ if dialogs are already turned off.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.DialogsOn">
+	<summary>
+ Decrements DialogOff counter and if zero, turns on popup messages/warnings issued by CopyCAD.  
+ </summary>
+</member><member name="P:PowerSolutionDOTNetOLE.clsCopyCADOLE.Visible">
+	<summary>
+ Get or set the visibility of the CopyCAD application window.
+ </summary>
+	<returns>True if CopyCAD is visible, False if CopyCAD is invisible.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.Version">
+	<summary>
+ Get version number of CopyCAD connected to.
+ </summary>
+	<returns>The version number</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsCopyCADOLE.CloseOLEConnections">
+	<summary>
+ Closes all OLE connection reference
+ </summary>
+</member><member name="T:PowerSolutionDOTNetOLE.clsCopyCADOLE">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsCopyCADOLE
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ OLE Tools For CopyCAD
+ </summary>
+	<history>
+ 	[dal]	24/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsIniFile.WriteIniValue(System.String,System.String,System.String,System.Object)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Write a value into a specified INI file
+ </summary>
+	<param name="Filename">The INI filename to write to</param>
+	<param name="Group">The group within the INI file to write to</param>
+	<param name="Key">The specific setting to add or edit in the INI file</param>
+	<param name="Value">The value to write to the setting</param>
+	<returns>True - INI Value written, False - Failed to write to INI file</returns>
+	<remarks>
+		<para>If the INI file does not exist, it will be automatically created.</para>
+		<para>The specified value will be added to the INI file, or the existing value edited if it exists.</para>
+		<para>This supports regional variations.  i.e. Real numbers will be written to the INI file in UK format (e.g. point decimal separator), regardless of what regional settings are set.</para>
+	</remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsIniFile.GetIniValue(System.String,System.String,System.String,System.Object)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reads a value from an INI file.
+ </summary>
+	<param name="Filename">The INI filename to read from</param>
+	<param name="Group">The group within the INI file to read from</param>
+	<param name="Key">The specific setting to read</param>
+	<param name="DefaultValue">A default value to return if the setting is not found</param>
+	<returns>The setting extracted from the INI file, or the default value if the value could not be read</returns>
+	<remarks>
+		<para>The type of the value returned will be the same as the type of the default variable passed into the function.</para>
+		<para>This supports regional variations, however real values must be stored in the INI file with POINT decimal separators.
+ However this will be converted to the current settings on the user's PC automatically</para>
+	</remarks>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:PowerSolutionDOTNetOLE.clsIniFile">
+ -----------------------------------------------------------------------------
+ Project	 : PowerSolutionDOTNetOLE
+ Class	 : clsIniFile
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Provides tools for reading and writing to an INI file
+ </summary>
+	<history>
+ 	[dal]	18/11/2004	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Execute(System.String[])">
+	<summary>
+ Executes macro commands in PowerSHAPE.  A single command or a list/array of commands can be passed in one go.
+ </summary>
+	<param name="Commands">A comma separated list of macro commands to execute, e.g. Execute("CREATE LINE SINGLE, "0 0 0", "10 0 0", "SELECT")</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Execute(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a single macro command
+ </summary>
+	<param name="Command">The macro command to execute</param>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Execute(System.String,System.Object[])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Executes a macro command in PowerSHAPE allowing you to substitute tokens in the macro command, and giving the
+ parameter list for these tokens in their real data type.
+ </summary>
+	<param name="Command">Macro command to execute</param>
+	<param name="Parameters">Parameters to replace tokens with</param>
+	<remarks>
+		<para>You can use tokens within the macro command</para>
+		<para>%i will be replaced by an integer value converted to a string</para>
+		<para>%d will be replaced by a double value converted to a string up to 6 decimal places</para>
+		<para>e.g.    Execute("CREATE LINE SINGLE %d %d %d", 100.5, 12.5, -2.3483)</para>
+		<para>This eliminates the need to convert values to strings to pass into the macro command before hand.</para>
+	</remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Evaluate(System.String)">
+	<summary>
+ Returns object information from PowerSHAPE
+ </summary>
+	<param name="Info">The object information string to evaluate</param>
+	<returns>The object information string to evaluate - note you should type cast for the type of data you expect.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Evaluate(System.String,System.Object[])">
+ -----------------------------------------------------------------------------
+ <summary>
+ Returns object information from PowerSHAPE
+ </summary>
+	<param name="Info">Object info string containing tokens to replace with parameters</param>
+	<param name="Parameters">Parameters to insert in token positions</param>
+	<returns>The object information string to evaluate</returns>
+	<remarks>
+ The tokenised string allows you to get object info without formatting strings first, e.g.
+ Dim Num As Integer = PS.Evaluate("SELECTION.NAME[%i]", c)
+ </remarks>
+	<history>
+ 	[dal]	14/02/2005	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.EvaluateMany(System.String,System.Object[])">
+	<summary>
+ Gets an array of object information.
+ </summary>
+	<param name="BaseObjectInfo">The main object information to return, including the * in the position to be replaced</param>
+	<param name="ReplaceStrings">An array of strings that will replace the * in the BaseObjectInfo string</param>
+	<returns>An array of object information</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Connect">
+	<summary>
+ Makes the OLE connection to the first running PowerSHAPE session
+ </summary>
+	<remarks>Note this this method connect to PowerSHAPE, it will not connect to PS-Surfacer.  If connecting to PS-Surfacer, use the ConnectAsPSSurfacer method</remarks>
+	<returns>True - OLE connection made, False - OLE connection failed</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.ConnectAsPSSurfacer">
+	<summary>
+ Makes the OLE connection to the first running PSSurfacer session.
+ </summary>
+	<remarks>Note this method should only be used when connecting to PS-Surfacer, not PowerSHAPE.</remarks>
+	<returns>True - OLE connection made, False - OLE connection failed</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.ReconnectToActiveDocument">
+	<summary>
+ Updates the DOCument object to link to the latest PSMODEL open in PowerSHAPE.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.CreateWorkplane(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Creates a workplane RELATIVE to WORLD, using the Z and Y axes specified.  The X axis is automatically set.
+ The function uses PowerSHAPE's OLE methods and creates the workplane in the PSMODEL the DOCument object is
+ connected to.  If no DOCument OLE connection exists, it will attempt to connect to the active PSMODEL. 
+ </summary>
+	<param name="Origin">A clsPoint3D object specifying the origin of the workplane</param>
+	<param name="ZAxis">A clsPoint3D object specifying the Z Axis of the workplane</param>
+	<param name="YAxis">A clsPoint3D object specifying the Y Axis of the workplane</param>
+	<returns>A clsEntityType object referenced to the new workplane entity created.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.CreateRelativeWorkplane(PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Creates a workplane RELATIVE to the ACTIVE WORKPLANE, using the Z and Y axes specified.  The X axis is automatically set.
+ The function uses PowerSHAPE's OLE methods and creates the workplane in the PSMODEL the DOCument object is
+ connected to.  If no DOCument OLE connection exists, it will attempt to connect to the active PSMODEL. 
+ </summary>
+	<param name="Origin">A clsPoint3D object specifying the origin of the workplane</param>
+	<param name="ZAxis">A clsPoint3D object specifying the Z Axis of the workplane</param>
+	<param name="YAxis">A clsPoint3D object specifying the Y Axis of the workplane</param>
+	<returns>A clsEntityType object referenced to the new workplane entity created.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.IsDOCConnected">
+	<summary>
+ Determines wether the DOCument object is linked to a PSMODEL.
+ </summary>
+	<returns>True - OLE link established, False - No OLE link established</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.IsPSConnected">
+	<summary>
+ Determines wether the Application OLE connection exists.
+ </summary>
+	<returns>True - OLE connection exists, False - No OLE connection</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.FindNearestPoint(PowerSolutionDOTNetOLE.clsEntityType@,PowerSolutionDOTNetOLE.clsPoint3D)">
+	<summary>
+ Given the surface and point, returns the nearest point on the surface relative to WORLD.
+ </summary>
+	<param name="Surface">A clsEntityType object referenced to the surface to check against</param>
+	<param name="RefPoint">A clsPoint3D object containing the 3D position to compare to the surface</param>
+	<returns>A clsPoint3D object containing the nearest point found on the surface relative to WORLD.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.CloseOLEConnections">
+	<summary>
+ Closes all OLE connection references
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.GetCreatedEntities">
+	<summary>
+ Retrieves an array of all entities that have just been created.
+ </summary>
+	<returns>An array of clsEntityType objects referencing the newly created entities.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.GetSelectedEntities">
+	<summary>
+ Retrieves an array of all entities that are selected.
+ </summary>
+	<returns>An array of clsEntityType objects referencing the selected entities.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.GetSelectedEntities(PowerSolutionDOTNetOLE.enum_EntityType[])">
+	<summary>
+ Retrieve an array of all entities that are selected of the type(s) specified.
+ </summary>
+	<param name="EntityType">A comma separatated list of entity types to filter from the selection.</param>
+	<returns>An array of clsEntityType object referencing the selected entites of the types specified.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.SetDialogMode(System.Boolean)">
+	<summary>
+ Sets the status of popup messages
+ </summary>
+	<param name="DialogOn">True - Turn popup messages on, False - Turn popup messages off.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.CopySelected">
+	<summary>
+ Copies the selected entities to the clipboard
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.CutSelected">
+	<summary>
+ Cuts the selected entites and places them on the clipboard
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Paste">
+	<summary>
+ Pastes the entities in the clipboard into the current model.
+ The pasted entites will be selected automatically.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.SelectEntityList(System.Boolean,PowerSolutionDOTNetOLE.clsEntityType[])">
+	<summary>
+ Selects all entities in the array of entities specified.
+ </summary>
+	<param name="ClearFirst">True - current selection is cleared first, False - entities will be added to current selection</param>
+	<param name="Entities">An array of clsEntityType objects that should be selected.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.SelectAllOnLevel(System.Int32)">
+	<summary>
+ Selects all entities on the specified level
+ (Note: if entities other that workplanes exist on the level, then workplanes will not be included.
+ The level will be turned on, all BLANKED entites will be UNBLANKED.
+ A View Refresh is executed automatically too)
+ </summary>
+	<param name="LevelNumber">The level to select.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.ShowEverythingOnLevel(System.Int32,System.Boolean)">
+	<summary>
+ Shows and unblanks everything on a specific level.
+ (Note: All BLANKED entities will be UNBLANKED, not just for the specified level.
+ A View Refresh is also executed automatically.)
+ </summary>
+	<param name="Level">The level to show</param>
+	<param name="HideAllOther">True - All other levels will be turned off, False - level status of other levels will be unchanged</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.RefreshView">
+	<summary>
+ Executes a View Refresh
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.RebuildDisplay">
+	<summary>
+ Executes a Display Rebuild
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.SelectAllWorkplanes">
+	<summary>
+ Selects all visible workplane.  The current selection will be cleared automatically first.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.BlankSelected">
+	<summary>
+ Blanks the selected entities.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.UnBlank">
+	<summary>
+ Unblanks all blanked entities.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.ClearSelection">
+	<summary>
+ Clears the current selection
+ </summary>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Visible">
+	<summary>
+ Property to set or get the visible state of PowerSHAPE.
+ </summary>
+	<returns>True - PowerSHAPE is visible, False - PowerSHAPE is hidden</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.SetWindowState(PowerSolutionDOTNetOLE.clsGlobalEnumerations.enum_WindowStateType)">
+	<summary>
+ Sets the window state of the PowerSHAPE application.
+ </summary>
+	<param name="Value">The windowstate for PowerSHAPE, e.g. psMaximise, psMinimise, etc.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.OpenModelIfNone">
+	<summary>
+ Opens a new model if none is open.  The DOCument OLE object is also created automatically.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.SetUnits(PowerSolutionDOTNetOLE.clsGlobalEnumerations.enum_UnitsType)">
+	<summary>
+ Used to set the current units in PowerSHAPE.
+ </summary>
+	<param name="Units">The units to use, e.g. psMM, psINCH</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.GetCurrentUnits">
+	<summary>
+ Returns the current units set in PowerSHAPE.
+ </summary>
+	<returns>The units constant, e.g. psMM, psINCH</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.ImportModel(System.String)">
+	<summary>
+ Imports the specified model into the active model.
+ </summary>
+	<param name="Filename">The filename to import.</param>
+	<returns>True - the model imported succesfully.  False - import failed.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.CloseAllModels">
+	<summary>
+ Closes all models in the PowerSHAPE application.
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.DistanceBetweenObjects(PowerSolutionDOTNetOLE.clsEntityType,PowerSolutionDOTNetOLE.clsEntityType)">
+	<summary>
+ Returns the minimum distance between 2 entities.
+ </summary>
+	<param name="Entity1">clsEntityType object referenced to 1st entity to measure</param>
+	<param name="Entity2">clsEntityType object referenced to 2nd entity to measure</param>
+	<returns>The distance between the entities.</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.DOCOLE">
+	<summary>
+ Provies access to the low level DOCument OLE object
+ </summary>
+	<returns></returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.PSOLE">
+	<summary>
+ Provies access to the low level APPLICATION OLE object
+ </summary>
+	<returns></returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE.Version">
+	<summary>
+ Get version number of PowerSHAPE connected to.
+ </summary>
+	<returns>The version number</returns>
+</member><member name="T:PowerSolutionDOTNetOLE.clsPowerSHAPEOLE">
+	<summary>
+ OLE Tools for PowerSHAPE
+ </summary>
+</member><member name="T:PowerSolutionDOTNetOLE.enum_EntityType">
+	<summary>
+ Enumeration of entity types
+ </summary>
+</member><member name="T:PowerSolutionDOTNetOLE.enum_ObjectList">
+	<summary>
+ Enumeration of the selection/update/created list of PowerSHAPE
+ </summary>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.#ctor(System.Int32)">
+	<summary>
+ Creates a new object referenced to a PowerSHAPE entity of a known COMPOSITE ID.
+ You can use this method to find out the physical name of an entity when you know its composite ID.
+ </summary>
+	<param name="CompositeID">The CompositeID of the entity to reference to.</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.#ctor(System.String,PowerSolutionDOTNetOLE.enum_EntityType)">
+	<summary>
+ Creates a new object referenced to a PowerSHAPE entity of a known name and type.
+ </summary>
+	<param name="ObjectName">The name of the entity.</param>
+	<param name="ObjectType">The type of the entity (defined by the enum_EntityType constants, e.g. enum_EntityType.CompCurve</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.#ctor(PowerSolutionDOTNetOLE.enum_ObjectList,System.Int32)">
+	<summary>
+ Creates a new object referenced from the SELECTION, CREATED, or UPDATED list specified.
+ The specific item within the list is also specified.
+ </summary>
+	<param name="FromList">The list to pick from (selection, created, or updated)</param>
+	<param name="Index">The item in the list to use, bound from 0.  e.g. First item is Index = 0</param>
+</member><member name="P:PowerSolutionDOTNetOLE.clsEntityType.CompositeID">
+	<summary>
+ Returns the composite ID of the entity referenced.  This can be used to find the Composite ID of an entity when
+ you know its name and type.
+ </summary>
+	<returns>The Composite ID</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsEntityType.EntityID">
+	<summary>
+ Returns the Entity ID of the reference entity.
+ </summary>
+	<returns></returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.DeleteEntity">
+	<summary>
+ Deletes the reference entity
+ </summary>
+</member><member name="P:PowerSolutionDOTNetOLE.clsEntityType.Name">
+	<summary>
+ Returns the name of the referenced entity
+ </summary>
+	<returns>The name</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsEntityType.Type">
+	<summary>
+ Returns the type of the referenced entity
+ </summary>
+	<returns>The type</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsEntityType.ObjectString">
+	<summary>
+ Returns a string for the base object information of the referenced entity, e.g. SURFACE['1']
+ </summary>
+	<returns>The base object info. string</returns>
+</member><member name="P:PowerSolutionDOTNetOLE.clsEntityType.SelectString">
+	<summary>
+ Returns a string of the macro command you can use to select this entity, e.g. ADD SURFACE "1"
+ </summary>
+	<returns>The select macro command</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.SelectObject(System.Boolean)">
+	<summary>
+ Selects the entity if it exists.  Clearing the selection first if required.
+ </summary>
+	<param name="ClearSelection">True - clear selected first, False - append to current selection</param>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.EntityExists">
+	<summary>
+ Checks if the entity still exists in the current model.
+ </summary>
+	<returns>True - entity still exists, False - entity no longer exists</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.GetObjectInfo(System.String)">
+	<summary>
+ Provide object info string, i.e.  GetObjectInfo("POINT.NUMBER") will work on the specific entity referenced.
+ </summary>
+	<param name="ObjectInfo">The specific object info string</param>
+	<returns>The object info for the entity referenced.</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.ObjectInfoString(System.String)">
+	<summary>
+ Returns a string of the full Object info. for the entity, i.e. SURFACE[1].LATERAL[1].POINT[2]
+ </summary>
+	<param name="ObjectInfo">The specified object info, e.g. LATERAL[1].POINT[2].</param>
+	<returns>The full object info string, e.g. SURFACE['1'].LATERAL[1].POINT[2]</returns>
+</member><member name="M:PowerSolutionDOTNetOLE.clsEntityType.DuplicateEntity">
+	<summary>
+ Duplicates the entity in PowerSHAPE and returns a clsEntityType object referenced to the new entity
+ </summary>
+	<returns>The clsEntityType object referenced to the new entity</returns>
+</member><member name="T:PowerSolutionDOTNetOLE.clsEntityType">
+	<summary>
+ Class for storing and accessing entity information more readily.
+ The OLE connection to PowerSHAPE must have already been created.
+ </summary>
+</member>
+</members>
+</doc>
